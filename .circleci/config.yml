@@ -26,24 +26,19 @@ jobs:
             --acl public-read \
             --cache-control "max-age=86400" \
           overwrite: true
-          
-version: 2.1
-jobs:
-  test:
-    docker:
-      - image: circleci/node
-    steps:
-      - checkout
-      - run: npm install
-      - run: npm test
-      - run: npm run lint
 workflows:
-  version:2.1
+  version: 2.1
   build:
     jobs:
       - test:
+        filters:
+          branches:
+            only:
+              - main
+              - develop
+      - deploy:
+          requires:
+            - test
           filters:
             branches:
-              only:
-                - main
-                - develop
+              only: main
