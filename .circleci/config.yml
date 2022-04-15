@@ -38,7 +38,7 @@ jobs:
       - run: npm test
       - run: npm run lint
 workflows:
-  version: 2.1
+  version:2.1
   build:
     jobs:
       - test:
